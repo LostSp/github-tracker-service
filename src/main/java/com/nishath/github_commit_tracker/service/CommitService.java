@@ -46,7 +46,6 @@ public class CommitService {
 
             // Create commit
             Commit commit = new Commit();
-//            commit.setCommitId(data.getId());
             commit.setCommitId(data.getId());
             commit.setMessage(data.getMessage());
             commit.setRepoName(repoName);
