@@ -73,7 +73,6 @@ public class CommitService {
         }
 
         // Send to Slack
-        System.out.println("sending notification");
         slackService.sendMessage(slackMessage.toString());
   }
 
