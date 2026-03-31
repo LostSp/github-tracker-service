@@ -18,7 +18,7 @@ public class SlackService {
     public void sendMessage(String message) {
         Map<String, String> payload = new HashMap<>();
         payload.put("text", message);
-
+        System.out.println("sending message to slack");
         restTemplate.postForObject(webhookUrl, payload, String.class);
     }
 }
