@@ -64,7 +64,6 @@ public class CommitService {
 
         //  Build Slack Summary
         StringBuilder slackMessage = new StringBuilder();
-        //GitHubWebhookPayload.CommitData data=(GitHubWebhookPayload.CommitData)payload.getCommits();
         slackMessage.append(name)
                 .append(" pushed ")
                 .append(commitMessages.size())
