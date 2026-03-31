@@ -9,7 +9,6 @@ import com.nishath.github_commit_tracker.repository.AuthorRepository;
 import com.nishath.github_commit_tracker.repository.CommitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +40,14 @@ public class CommitService {
                     .orElseGet(() -> {
 
                         Author newAuthor = new Author();
+//                        newAuthor.setName(authorName);
                         newAuthor.setName(authorName);
                         return authorRepository.save(newAuthor);
                     });
 
             // Create commit
             Commit commit = new Commit();
+//            commit.setCommitId(data.getId());
             commit.setCommitId(data.getId());
             commit.setMessage(data.getMessage());
             commit.setRepoName(repoName);
@@ -73,5 +74,8 @@ public class CommitService {
 //
 //        // Send to Slack
 //        slackService.sendMessage(slackMessage.toString());
-    }
+  }
+
+
+
 }
