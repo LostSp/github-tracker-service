@@ -41,7 +41,6 @@ public class CommitService {
                     .orElseGet(() -> {
 
                         Author newAuthor = new Author();
-//                        newAuthor.setName(authorName);
                         newAuthor.setName(authorName);
                         return authorRepository.save(newAuthor);
                     });
