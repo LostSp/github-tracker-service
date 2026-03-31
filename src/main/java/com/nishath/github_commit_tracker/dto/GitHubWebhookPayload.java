@@ -2,8 +2,10 @@ package com.nishath.github_commit_tracker.dto;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GitHubWebhookPayload {
 
     private Repository repository;
@@ -15,8 +17,9 @@ public class GitHubWebhookPayload {
     public List<CommitData> getCommits() { return commits; }
     public void setCommits(List<CommitData> commits) { this.commits = commits; }
 
-    // Inner classes
+    // ---------------- INNER CLASSES ----------------
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Repository {
         private String name;
 
@@ -24,6 +27,7 @@ public class GitHubWebhookPayload {
         public void setName(String name) { this.name = name; }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class CommitData {
         private String id;
         private String message;
@@ -43,6 +47,7 @@ public class GitHubWebhookPayload {
         public void setAuthor(Author author) { this.author = author; }
     }
 
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Author {
         private String name;
 

@@ -51,7 +51,10 @@ public class CommitService {
             commit.setCommitId(data.getId());
             commit.setMessage(data.getMessage());
             commit.setRepoName(repoName);
-            commit.setTimestamp(LocalDateTime.parse(data.getTimestamp()));
+            commit.setTimestamp(
+                    java.time.OffsetDateTime.parse(data.getTimestamp()).toLocalDateTime()
+            );
+          //  commit.setTimestamp(LocalDateTime.parse(data.getTimestamp()));
             commit.setAuthor(author);
 
             commitRepository.save(commit);
