@@ -36,7 +36,6 @@ public class CommitService {
 
             final String authorName = data.getAuthor().getName();
              name=data.getAuthor().getName();
-
             // Find or create author
             Author author = authorRepository.findByName(authorName)
                     .orElseGet(() -> {
