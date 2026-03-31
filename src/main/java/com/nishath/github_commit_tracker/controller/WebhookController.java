@@ -11,9 +11,14 @@ public class WebhookController {
     @Autowired
     private CommitService commitService;
 
-    @PostMapping("/github")
-    public String receiveWebhook(@RequestBody GitHubWebhookPayload payload) {
-        commitService.processWebhook(payload);
-        return "Webhook processed successfully";
-    }
+//    @PostMapping("/github")
+//    public String receiveWebhook(@RequestBody GitHubWebhookPayload payload) {
+//        commitService.processWebhook(payload);
+//        return "Webhook processed successfully";
+//    }
+@PostMapping("/github")
+public String receiveWebhook(@RequestBody String payload) {
+    System.out.println("RAW PAYLOAD:"+ payload);
+    return "Webhook processed successfully";
+}
 }
