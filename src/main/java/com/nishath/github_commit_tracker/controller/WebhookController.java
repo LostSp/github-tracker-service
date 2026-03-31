@@ -13,7 +13,6 @@ public class WebhookController {
 
     @PostMapping("/github")
     public String receiveWebhook(@RequestBody GitHubWebhookPayload payload) {
-        System.out.println("HI");
         System.out.println("payload commits: "+payload.getCommits());
         commitService.processWebhook(payload);
         return "Webhook processed successfully";
