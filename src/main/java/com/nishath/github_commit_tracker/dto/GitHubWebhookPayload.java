@@ -17,7 +17,6 @@ public class GitHubWebhookPayload {
     public List<CommitData> getCommits() { return commits; }
     public void setCommits(List<CommitData> commits) { this.commits = commits; }
 
-    // ---------------- INNER CLASSES ----------------
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Repository {

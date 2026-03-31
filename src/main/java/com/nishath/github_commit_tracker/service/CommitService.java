@@ -10,6 +10,7 @@ import com.nishath.github_commit_tracker.repository.CommitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,18 +23,19 @@ public class CommitService {
     @Autowired
     private AuthorRepository authorRepository;
 
-//    @Autowired
-//    private SlackService slackService;
+    @Autowired
+    private SlackService slackService;
 
     public void processWebhook(GitHubWebhookPayload payload) {
 
         List<String> commitMessages = new ArrayList<>();
         String repoName = payload.getRepository().getName();
-
-
+        String name = "";
+        
         for (GitHubWebhookPayload.CommitData data : payload.getCommits()) {
 
             final String authorName = data.getAuthor().getName();
+             name=data.getAuthor().getName();
 
             // Find or create author
             Author author = authorRepository.findByName(authorName)
@@ -52,7 +54,7 @@ public class CommitService {
             commit.setMessage(data.getMessage());
             commit.setRepoName(repoName);
             commit.setTimestamp(
-                    java.time.OffsetDateTime.parse(data.getTimestamp()).toLocalDateTime()
+                    OffsetDateTime.parse(data.getTimestamp()).toLocalDateTime()
             );
           //  commit.setTimestamp(LocalDateTime.parse(data.getTimestamp()));
             commit.setAuthor(author);
@@ -62,21 +64,22 @@ public class CommitService {
             commitMessages.add(data.getMessage());
         }
 
-        // 🔥 Build Slack Summary
-//        StringBuilder slackMessage = new StringBuilder();
-//        slackMessage.append(authorName)
-//                .append(" pushed ")
-//                .append(commitMessages.size())
-//                .append(" commits to repo ")
-//                .append(repoName)
-//                .append(":\n");
-//
-//        for (String msg : commitMessages) {
-//            slackMessage.append("- ").append(msg).append("\n");
-//        }
-//
-//        // Send to Slack
-//        slackService.sendMessage(slackMessage.toString());
+        //  Build Slack Summary
+        StringBuilder slackMessage = new StringBuilder();
+        //GitHubWebhookPayload.CommitData data=(GitHubWebhookPayload.CommitData)payload.getCommits();
+        slackMessage.append(name)
+                .append(" pushed ")
+                .append(commitMessages.size())
+                .append(" commits to repo ")
+                .append(repoName)
+                .append(":\n");
+
+        for (String msg : commitMessages) {
+            slackMessage.append("- ").append(msg).append("\n");
+        }
+
+        // Send to Slack
+        slackService.sendMessage(slackMessage.toString());
   }
 
 
